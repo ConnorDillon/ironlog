@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {{ bootstrap.load_css() }}
+    {{ bootstrap.load_js() }}
+    <meta charset="UTF-8">
+    <title>Ironlog</title>
+</head>
+<body>
+    {% from 'bootstrap5/form.html' import render_form_row %}
+    {% from 'bootstrap5/table.html' import render_table %}
+    <form method="post">
+        {{ setform.csrf_token() }}
+        {{ render_form_row([setform.date, setform.exercise, setform.reps, setform.weight]) }}
+        {{ render_form_row([setform.submit]) }}
+    </form>
+    {{ render_table(sets, table_classes='table-striped', header_classes='thead-dark', model=Set,
+                    show_actions=True, delete_url=('delete', [('id', ':id')])) }}
+</body>
+</html>
