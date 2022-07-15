@@ -8,7 +8,7 @@
 </head>
 <body>
     {% from 'bootstrap4/nav.html' import render_nav_item %}
-    {% from 'bootstrap5/form.html' import render_form_row %}
+    {% from 'bootstrap5/form.html' import render_form %}
     {% from 'bootstrap5/table.html' import render_table %}
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="navbar-nav mr-auto">
@@ -17,12 +17,10 @@
         </div>
     </nav>
     <form method="post">
-        {{ setform.csrf_token() }}
-        {{ render_form_row([setform.date, setform.type, setform.reps, setform.weight]) }}
-        {{ render_form_row([setform.submit]) }}
+        {{ type_form.csrf_token() }}
+        {{ render_form(type_form) }}
     </form>
-    {{ render_table(sets, titles=[('id', 'ID'), ('date', 'Date'), ('name', 'Type'), ('reps', 'Reps')],
-                    table_classes='table-striped', header_classes='thead-dark', model=Set,
-                    show_actions=True, delete_url=('delete', [('id', ':id')])) }}
+    {{ render_table(types, table_classes='table-striped', header_classes='thead-dark', model=ExerciseType,
+                    show_actions=True, delete_url=('delete_exercise_type', [('id', ':id')])) }}
 </body>
 </html>
